@@ -3,7 +3,7 @@
 Plugin Name: Companion Plugin
 Plugin URI: https://github.com/Automattic/companion
 Description: Helps keep the launched WordPress in order.
-Version: 1.3.1
+Version: 1.3.2
 Author: Osk
 */
 
@@ -37,6 +37,7 @@ function companion_admin_notices() {
 		<p><strong><span id="jurassic_url"><?php echo esc_html( network_site_url() ); ?></span></strong> <?php echo esc_html__( 'will be destroyed 7 days after the last time anybody logged in.' ); ?></p>
 		<p>
 			<strong>WP user:</strong> <code><span id="jurassic_username">demo</span></code>
+			<strong>SSH user:</strong> <code><span id="jurassic_ssh_user"><?php echo esc_html( $sysuser ); ?></span></code>
 			<strong>SSH:</strong> <code><span id="jurassic_ssh_command">ssh <?php echo esc_html( $sysuser ); ?>@<?php echo esc_html( $host ); ?></span></code>
 		</p>
 		<p>
@@ -46,7 +47,9 @@ function companion_admin_notices() {
 	</div>
 	<style type="text/css">
 		#jurassic_ssh_command {
-			user-select: all;	
+			user-select: all;
+			-webkit-user-select: all;
+			-moz-user-select: all;
 		}
 	</style>
 	<?php
