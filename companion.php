@@ -7,6 +7,9 @@ Version: 1.6
 Author: Osk
 */
 
+error_log( print_r( 'COMPNION PLUGIN', 1 ) );
+error_log( print_r( $_GET, 1 ) );
+
 if ( is_multisite() && ! is_main_site() ) {
 	add_action( 'pre_current_active_plugins', 'companion_hide_plugin' );
 	add_action( 'admin_notices', 'companion_admin_notices' );
