@@ -7,15 +7,6 @@ Version: 1.6
 Author: Osk
 */
 
-error_log( print_r( 'COMPNION PLUGIN', 1 ) );
-error_log( print_r( $_GET, 1 ) );
-
-if ( ( function_exists('is_gutenberg_page') && is_gutenberg_page() ) || ( function_exists('has_blocks') && has_blocks( $content ) )  ) {
-		// DO SOMETHING
-		error_log( print_r( 'IS GUTENBERG!', 1 ) );
-		error_log( print_r( $_GET, 1 ) );
-}
-
 if ( is_multisite() && ! is_main_site() ) {
 	add_action( 'pre_current_active_plugins', 'companion_hide_plugin' );
 	add_action( 'admin_notices', 'companion_admin_notices' );
@@ -35,6 +26,16 @@ companion_tamper_with_jetpack_constants();
 add_action( 'init', 'companion_add_jetpack_constants_option_page' );
 
 function companion_admin_notices() {
+	if (is_admin()){
+		if ( ( function_exists('is_gutenberg_page') ) ) {
+			error_log( print_r( 'is_gutenberg_page: ' . is_gutenberg_page(), 1 ) );
+		}
+		$screen = get_current_screen();
+		if ($screen -> id == "post"){			// This is the admin Dashboard screen
+			error_log( print_r( 'get_current_screen ', 1 ) );
+			error_log( print_r( $screen, 1 ) );
+		}
+	}
 	$password_option_key = 'jurassic_ninja_admin_password';
 	$sysuser_option_key = 'jurassic_ninja_sysuser';
 	$admin_password = is_multisite() ? get_blog_option( 1, $password_option_key ) : get_option( $password_option_key );
